@@ -20,9 +20,7 @@ const CategoryCardContent = ({ answers = [] }) => {
   if (answers.length === 0) return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
   return answers.map(answer => 
     <div key={`answer-${answer}`} className="category-card-content">
-      <Typography.Text type="secondary">
-        {answer}
-      </Typography.Text>
+      <Typography.Text copyable>{answer}</Typography.Text>
     </div>
   )
 }
