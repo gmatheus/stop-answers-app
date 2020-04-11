@@ -5,8 +5,16 @@ import { Layout, Row, Col } from 'antd'
 
 import { Form, Answers } from '../.'
 
+import CATEGORIES from '../../utils/categories'
+
+const INITIAL_FORM_VALUES = {
+  letter: null,
+  allCategories: true,
+  categories: CATEGORIES.map(c => c.name)
+}
+
 const Content = ({ fetchAnswers }) => {
-  const [formValues, setFormValues] = useState({})
+  const [formValues, setFormValues] = useState(INITIAL_FORM_VALUES)
   const [answers, setAnswers] = useState([])
 
   useEffect(() => {
@@ -19,7 +27,7 @@ const Content = ({ fetchAnswers }) => {
     <Layout.Content className="content">
       <Row gutter={[16, 16]}>
         <Col xs={24}>
-          <Form setFormValues={setFormValues} />
+          <Form formValues={formValues} setFormValues={setFormValues} />
         </Col>
         <Col xs={24}>
           <Answers filters={formValues} answers={answers} />
