@@ -2,6 +2,7 @@ import React from 'react'
 import './Answers.css'
 
 import { Row, Col, Card, Typography, Empty } from 'antd'
+import { CategoryText } from '../.'
 
 import CATEGORIES from '../../utils/categories'
 
@@ -14,14 +15,6 @@ const groupAnswersByCategory = (answersList = []) => {
     return { category, answers }
   })
 }
-
-const CategoryWithEmoji = ({ category = {} }) => 
-  <React.Fragment>
-    <span role="img" aria-label="pencil" className="category-card-emoji">
-      {category.emoji}
-    </span>
-    {category.name}
-  </React.Fragment>
 
 const CategoryCardContent = ({ answers = [] }) => {
   if (answers.length === 0) return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
@@ -38,7 +31,7 @@ const CategoryCard = ({ category, answers = [] }) =>
   <Card
     size="small"
     bordered
-    title={<CategoryWithEmoji category={category} />}
+    title={<CategoryText name={category.name} emoji={category.emoji} />}
     className="category-card"
   >
     <CategoryCardContent answers={answers} />
