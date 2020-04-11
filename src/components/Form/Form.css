@@ -1,0 +1,11 @@
+.letters-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.letter-button {
+  width: 32px;
+  margin: 5px;
+  padding: 0;
+  text-align: center;
+}
