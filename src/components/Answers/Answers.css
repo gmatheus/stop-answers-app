@@ -1,0 +1,12 @@
+.category-card {
+  height: 100%;
+}
+
+.category-card > .ant-card-head {
+  background: #1e1e1e;
+}
+
+.category-card-content {
+  display: flex;
+  flex-direction: column;
+}
