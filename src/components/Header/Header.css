@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-typography.title {
+  margin: 0;
+}
+
+.emoji {
+  margin-left: 5px;
+}
