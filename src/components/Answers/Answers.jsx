@@ -9,11 +9,19 @@ const MAX_ANSWERS = 6
 
 const groupAnswersByCategory = (answersList = []) => {
   return CATEGORIES.map(category => { 
-    const filteredAnswers = answersList.filter(a => a.category === category).map(a => a.answer) || []
+    const filteredAnswers = answersList.filter(a => a.category === category.name).map(a => a.answer) || []
     const answers = [...new Set(filteredAnswers)].slice(0, MAX_ANSWERS)
     return { category, answers }
   })
 }
+
+const CategoryWithEmoji = ({ category = {} }) => 
+  <React.Fragment>
+    <span role="img" aria-label="pencil" className="category-card-emoji">
+      {category.emoji}
+    </span>
+    {category.name}
+  </React.Fragment>
 
 const CategoryCardContent = ({ answers = [] }) => {
   if (answers.length === 0) return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
@@ -30,7 +38,7 @@ const CategoryCard = ({ category, answers = [] }) =>
   <Card
     size="small"
     bordered
-    title={category}
+    title={<CategoryWithEmoji category={category} />}
     className="category-card"
   >
     <CategoryCardContent answers={answers} />
@@ -46,7 +54,7 @@ const Answers = ({ letter, answers = [] }) => {
       <Row gutter={[8, 8]} type="flex">
         {
           answersByCategory.map(({ category, answers }) => 
-            <Col key={`category-${category}`} xs={24} sm={12} md={8} lg={4}>
+            <Col key={`category-${category.name}`} xs={24} sm={12} md={8} lg={4}>
               <CategoryCard category={category} answers={answers} />
             </Col>
           )
