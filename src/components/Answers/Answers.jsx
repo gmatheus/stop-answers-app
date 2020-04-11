@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Answers.css'
 
-import { Row, Col, Card, Typography, Empty } from 'antd'
+import { Row, Col, Card, Input, Typography, Empty } from 'antd'
+
 import { CategoryText } from '../.'
 
 import CATEGORIES from '../../utils/categories'
+
+const { Search } = Input
+const { Text } = Typography
 
 const MAX_ANSWERS = 6
 
@@ -20,7 +24,7 @@ const CategoryCardContent = ({ answers = [] }) => {
   if (answers.length === 0) return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
   return answers.map(answer => 
     <div key={`answer-${answer}`} className="category-card-content">
-      <Typography.Text copyable>{answer}</Typography.Text>
+      <Text copyable>{answer}</Text>
     </div>
   )
 }
@@ -37,13 +41,24 @@ const CategoryCard = ({ category, answers = [] }) =>
 
 const Answers = ({ filters = {}, answers = [] }) => {
   const { letter, categories = [] } = filters
+  const [searchText, setSearchText] = useState('')
+  
   if (!letter) return null
+
   const isLoading = answers.length === 0
   const answersByCategory = groupAnswersByCategory(answers)
-  const filteredAnswers = answersByCategory.filter(a => categories.includes(a.category.name))
+  const filteredAnswers = answersByCategory.filter(({ category }) =>
+    categories.includes(category.name) &&
+    new RegExp(searchText, 'i').test(category.name)
+  )
 
   return (
-    <Card title={`Answers for "${letter}"`} bordered={false} loading={isLoading}>
+    <Card
+      title={`Answers for "${letter}"`}
+      extra={<Search placeholder="Quick search" onChange={e => setSearchText(e.target.value)} />}
+      bordered={false}
+      loading={isLoading}
+    >
       <Row gutter={[8, 8]} type="flex">
         {
           filteredAnswers.map(({ category, answers }) => 
