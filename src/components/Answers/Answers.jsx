@@ -37,16 +37,18 @@ const CategoryCard = ({ category, answers = [] }) =>
     <CategoryCardContent answers={answers} />
   </Card>
 
-const Answers = ({ letter, answers = [] }) => {
+const Answers = ({ filters = {}, answers = [] }) => {
+  const { letter, categories = [] } = filters
   if (!letter) return null
   const isLoading = answers.length === 0
   const answersByCategory = groupAnswersByCategory(answers)
+  const filteredAnswers = answersByCategory.filter(a => categories.includes(a.category.name))
 
   return (
     <Card title={`Answers for "${letter}"`} bordered={false} loading={isLoading}>
       <Row gutter={[8, 8]} type="flex">
         {
-          answersByCategory.map(({ category, answers }) => 
+          filteredAnswers.map(({ category, answers }) => 
             <Col key={`category-${category.name}`} xs={24} sm={12} md={8} lg={4}>
               <CategoryCard category={category} answers={answers} />
             </Col>

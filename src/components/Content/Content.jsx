@@ -22,7 +22,7 @@ const Content = ({ fetchAnswers }) => {
           <Form setFormValues={setFormValues} />
         </Col>
         <Col xs={24}>
-          <Answers letter={formValues.letter} answers={answers} />
+          <Answers filters={formValues} answers={answers} />
         </Col>
       </Row>
     </Layout.Content>
