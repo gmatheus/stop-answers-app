@@ -1,3 +1,15 @@
+# Stop Answer Generator ✏️
+
+> Answer generator for "Stop" game (also called "Adedanha" or "City-Country-River" game) - compatible with https://stopots.com.br/
+
+![app-screenshot.png](public/app-screenshot.png)
+
+## About
+
+Made in React using the public `stopanswersapi.firebaseapp.com` API (special thanks to https://github.com/nosliper/StopAnswersAPI)
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
